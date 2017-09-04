@@ -1,0 +1,69 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+
+    $_infoblock = Mage::getStoreConfig('porto_settings/contacts/infoblock', $code);
+    $custom_block = Mage::getStoreConfig('porto_settings/contacts/customblock', $code);
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php if($custom_block): ?>
+<div class="row">
+    <div class="col-sm-12">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($custom_block)->toHtml(); ?>
+    </div>
+</div>
+<?php endif; ?>
+<div class="row">
+    <div class="col-sm-8">
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+    <h2 class="legend"><?php echo Mage::helper('contacts')->__('Leave') ?> <?php echo Mage::helper('contacts')->__('a') ?> <b><?php echo Mage::helper('contacts')->__('Message') ?></b></h2>
+    <div class="row">
+        <ul class="form-list col-sm-6" style="margin-top: -30px;">
+            <li>
+                <label style="color: #0b4582;font-weight: bold;" for="name" class="required">Nombre</label>
+                <div class="input-box">
+                    <input name="name" id="name" title="Nombre" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" placeholder="* Ingrese su nombre"/>
+                </div>
+            </li>
+            <li>
+                <label style="color: #0b4582;font-weight: bold;" for="email" class="required">E-mail</label>
+                <div class="input-box">
+                    <input name="email" id="email" title="E-mail" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" placeholder="* Ingrese su e-mail" />
+                </div>
+            </li>
+            <li>
+                <label style="color: #0b4582;font-weight: bold;" for="telephone">Teléfono</label>
+                <div class="input-box">
+                    <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" placeholder="" class="input-text" type="text" />
+                </div>
+            </li>
+        </ul>
+        <ul class="form-list col-sm-6">
+            <li>
+                <div class="input-box input-textarea">
+                    <textarea name="comment" id="comment" title="Mensaje" class="required-entry input-text" cols="5" rows="3" placeholder="* Mensaje"></textarea>
+                </div>
+            </li>
+            <li>
+                <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+                <button type="submit" title="ENVIAR" class="button"><span><span>ENVIAR</span></span></button>
+            </li>
+        </ul>
+    </div>
+</form>
+<!-- <section>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1102.606425761501!2d-76.99179960418438!3d-12.113907672119371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7ec76708fe5%3A0x3031f5f55413f4d2!2sCentro+Comercial+Caminos+del+Inca!5e0!3m2!1ses-419!2spe!4v1502800064580" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</section> -->
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>
+    </div>
+    <div class="col-sm-4 contact-info">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact') ?> <b><?php echo Mage::helper('contacts')->__('Details') ?></b></h2>
+        <?php
+            echo $_infoblock;
+        ?>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<style type="text/css">
+    .main-container.col1-layout {
+        background-image: url(http://sergiosaavedra.me/media/wysiwyg/bg_suscribirse.png);
+        background-position: center center !important;
+        background-size: cover !important;
+    }
+    .abugattas-login {
+        max-width: 500px;
+        float: inherit !important;
+        margin: 0 auto;
+        text-align: center;
+        border-top: inherit !important;
+    }
+    #login-form{
+        border-top: inherit !important;
+        padding: 0 !important;
+    }
+</style>
+<div class="abugattas-login">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form" style="border-top: inherit !important;margin-top: 20px !important;">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="registered-users form-wrap" style="padding: 20px;">
+                    <div class="content">
+                        <div class="caja-login" >
+                         <h2 style="color: #0b4582 !important;">INGRESAR</h2>
+                         <div class="bloque-login" style="display: table;width: 100%;text-align: center;">
+                             <a href="#facebook-login" style="width: 200px;height: 36px;display: block;background: #3b5998;color: #fff !important;padding: 0;margin: 0 auto 15px auto;">
+                                 <img src="http://sergiosaavedra.me/media/wysiwyg/facebook.png" style="height: 36px;width: 36px;float: left;">
+                                 <span style="height: 36px;display: inline-block;float: left;padding-top: 10px;">Conectar con facebook</span>
+                             </a>
+                         </div>
+                      <p>ó</p>
+                  </div>
+                  <ul class="form-list">
+                    <li>
+                        <div class="input-box">
+                            <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" placeholder="E-mail" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-box">
+                            <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" placeholder="Contraseña"/>
+                        </div>
+                    </li>
+                    <?php echo $this->getChildHtml('form.additional.info'); ?>
+                    <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                </ul>
+                <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                <!-- <p class="required"><?php echo $this->__('* Required Fields') ?></p> -->
+            </div>
+            <div class="buttons-set" style="text-align: center !important;">
+                <div class="text-left" style="width: 100% !important;float: left;margin-bottom: 15px;">
+                    <a href="http://sergiosaavedra.me/customer/account/forgotpassword/" class="f-left" style="text-align: left;font-weight: 700 !important;">Olvidé mi contraseña</a>
+                </div>
+                <button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2" style="float: inherit !important;margin-bottom: 20px !important;margin-left: 0 !important;padding-left: 25px !important;padding-right: 25px;"><span><span>INICIAR SESIÓN</span></span></button>
+            </div>
+        </div>
+        <div class="registro-abugattas" style="background: #0b4582;margin-top: 15px;padding: 8px 10px;margin-left: -1px;margin-right: -1px;margin-bottom: -1px;">
+          <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';" style="background: #0b4582;width: 100% !important;margin-left: -20px;margin-right: -20px;"><span><span>REGÍSTRECE</span></span></button>
+      </div>
+  </div>
+</div>
+<?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+    <input name="context" type="hidden" value="checkout" />
+<?php endif; ?>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('login-form', true);
+    //]]>
+</script>
+</div>
